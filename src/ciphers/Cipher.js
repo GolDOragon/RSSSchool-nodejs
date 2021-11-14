@@ -1,16 +1,9 @@
 const Caesar = require('./Caesar');
 const Atbash = require('./Atbash');
 const Rot8 = require('./Rot8');
+const { AppError, CODES } = require('../AppError');
 
 class Cipher {
-  encrypt(data) {
-    return this.#config.reduce((encryptedData, mark) => {
-      const cipher = this.#getCipher(mark);
-
-      return cipher(encryptedData);
-    }, data);
-  }
-
   #config = [];
 
   #caesar = new Caesar();
@@ -23,8 +16,19 @@ class Cipher {
     if (Cipher.#isValid(config)) {
       this.#config = config.split('-');
     } else {
-      throw new Error('Invalid encrypt config, please use {XY(-)}n pattern');
+      throw new AppError(
+        'Invalid encrypt config, please use {XY(-)}n pattern',
+        CODES.invalidConfigOption,
+      );
     }
+  }
+
+  run(data) {
+    return this.#config.reduce((encryptedData, mark) => {
+      const cipher = this.#getCipher(mark);
+
+      return cipher(encryptedData);
+    }, data);
   }
 
   #getCipher(mark) {

@@ -1,3 +1,5 @@
+const { AppError, CODES } = require('./AppError');
+
 // TODO: move common code in a function
 class Parser {
   parse(argv) {
@@ -18,14 +20,16 @@ class Parser {
     const optionCount = args.filter(isConfigOption).length;
 
     if (optionCount > 1) {
-      throw new Error(
+      throw new AppError(
         'Too many config options, please provide only one "-c" or "--config" option!',
+        CODES.invalidConfigOption,
       );
     }
 
     if (!optionCount) {
-      throw new Error(
+      throw new AppError(
         'You haven\'t written config option, please provide "-c" or "--config" option!',
+        CODES.invalidConfigOption,
       );
     }
 
@@ -41,7 +45,10 @@ class Parser {
     const optionCount = args.filter(isInputOption).length;
 
     if (optionCount > 1) {
-      throw new Error('Too many input options, please provide only one "-i" or "--input" option!');
+      throw new AppError(
+        'Too many input options, please provide only one "-i" or "--input" option!',
+        CODES.invalidInputOption,
+      );
     }
 
     if (!optionCount) {
@@ -60,8 +67,9 @@ class Parser {
     const optionCount = args.filter(isOutputOption).length;
 
     if (optionCount > 1) {
-      throw new Error(
+      throw new AppError(
         'Too many output options, please provide only one "-o" or "--output" option!',
+        CODES.invalidOutputOption,
       );
     }
 

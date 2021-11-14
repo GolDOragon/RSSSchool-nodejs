@@ -1,12 +1,12 @@
 const { Transform } = require('stream');
-const Cipher = require('./ciphers/Cipher');
+const Cipher = require('../ciphers/Cipher');
 
 function getTransformStream(config) {
   const cipher = new Cipher(config);
 
   return new Transform({
     transform(chunk, encoding, cb) {
-      const encryptedText = cipher.encrypt(chunk.toString());
+      const encryptedText = cipher.run(chunk.toString());
       this.push(encryptedText);
       cb();
     },
