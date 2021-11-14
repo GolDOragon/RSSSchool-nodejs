@@ -9,7 +9,7 @@ async function getReadStream(file) {
   try {
     await fs.accessSync(file, fs.constants.R_OK);
 
-    return fs.createReadStream(file);
+    return fs.createReadStream(file, { flags: 'r' });
   } catch {
     throw new Error("Can't get access to input file");
   }
