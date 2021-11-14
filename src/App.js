@@ -24,11 +24,11 @@ class App {
 
       pipeline(inputStream, transformStream, outputStream, (err) => {
         if (err) {
-          console.error(err);
+          console.error(err); // eslint-disable-line no-console
         }
       });
     } catch (err) {
-      console.error(err);
+      console.error(err); // eslint-disable-line no-console
     }
   }
 }

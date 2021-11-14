@@ -2,7 +2,7 @@ const fs = require('fs');
 
 async function getWriteStream(file) {
   if (!file) {
-    console.log("You don't write output file, will use stdout");
+    console.log("You don't write output file, will use stdout"); // eslint-disable-line no-console
     return process.stdout;
   }
 

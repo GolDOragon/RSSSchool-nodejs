@@ -2,7 +2,7 @@ const fs = require('fs');
 
 async function getReadStream(file) {
   if (!file) {
-    console.log("You don't write input file, will use stdin");
+    console.log("You don't write input file, will use stdin"); // eslint-disable-line no-console
     return process.stdin;
   }
 
