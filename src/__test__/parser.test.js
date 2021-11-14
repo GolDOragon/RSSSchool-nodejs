@@ -49,11 +49,9 @@ describe('Parser', () => {
   });
 
   describe('input:', () => {
-    test('should return "stdout" if there isn\'t input option', () => {
+    test("should return undefined if there isn't input option", () => {
       ARGV.splice(4, 2);
-      expect(() => {
-        parser.parse(ARGV);
-      }).toThrow('You haven\'t written config option, please provide "-i" or "--input" option!');
+      expect(parser.parse(ARGV).input).toBeUndefined();
     });
 
     test('should throw error if there are more than one input option', () => {
@@ -62,16 +60,14 @@ describe('Parser', () => {
 
       expect(() => {
         parser.parse(ARGV);
-      }).toThrow('Too many config options, please provide only one "-i" or "--input" option!');
+      }).toThrow('Too many input options, please provide only one "-i" or "--input" option!');
     });
   });
 
   describe('output:', () => {
-    test('should return "stdout" if there isn\'t output option', () => {
+    test("should return undefined if there isn't output option", () => {
       ARGV.splice(6, 2);
-      expect(() => {
-        parser.parse(ARGV);
-      }).toThrow('You haven\'t written config option, please provide "-o" or "--output" option!');
+      expect(parser.parse(ARGV).output).toBeUndefined();
     });
 
     test('should throw error if there are more than one output option', () => {
@@ -80,7 +76,7 @@ describe('Parser', () => {
 
       expect(() => {
         parser.parse(ARGV);
-      }).toThrow('Too many config options, please provide only one "-o" or "--output" option!');
+      }).toThrow('Too many output options, please provide only one "-o" or "--output" option!');
     });
   });
 });

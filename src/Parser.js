@@ -12,10 +12,6 @@ class Parser {
 
   #CONFIG_OPTION = ['-c', '--config'];
 
-  #INPUT_OPTIONS = ['-i', '--input'];
-
-  #OUTPUT_OPTIONS = ['-o', '--output'];
-
   #getConfig(args) {
     const isConfigOption = (arg) => this.#CONFIG_OPTION.includes(arg);
 
@@ -38,18 +34,18 @@ class Parser {
     return args[index + 1];
   }
 
+  #INPUT_OPTIONS = ['-i', '--input'];
+
   #getInput(args) {
     const isInputOption = (arg) => this.#INPUT_OPTIONS.includes(arg);
     const optionCount = args.filter(isInputOption).length;
 
     if (optionCount > 1) {
-      throw new Error('Too many config options, please provide only one "-i" or "--input" option!');
+      throw new Error('Too many input options, please provide only one "-i" or "--input" option!');
     }
 
     if (!optionCount) {
-      throw new Error(
-        'You haven\'t written config option, please provide "-i" or "--input" option!',
-      );
+      return undefined;
     }
 
     const index = args.findIndex(isInputOption);
@@ -57,20 +53,20 @@ class Parser {
     return args[index + 1];
   }
 
+  #OUTPUT_OPTIONS = ['-o', '--output'];
+
   #getOutput(args) {
     const isOutputOption = (arg) => this.#OUTPUT_OPTIONS.includes(arg);
     const optionCount = args.filter(isOutputOption).length;
 
     if (optionCount > 1) {
       throw new Error(
-        'Too many config options, please provide only one "-o" or "--output" option!',
+        'Too many output options, please provide only one "-o" or "--output" option!',
       );
     }
 
     if (!optionCount) {
-      throw new Error(
-        'You haven\'t written config option, please provide "-o" or "--output" option!',
-      );
+      return undefined;
     }
 
     const index = args.findIndex(isOutputOption);
