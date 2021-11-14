@@ -1,3 +1,7 @@
+const Caesar = require('./Caesar');
+const Atbash = require('./Atbash');
+const Rot8 = require('./Rot8');
+
 class Cipher {
   encrypt(data) {
     return this.#config.reduce((encryptedData, mark) => {
@@ -9,11 +13,11 @@ class Cipher {
 
   #config = [];
 
-  #caesar = () => (d) => d;
+  #caesar = new Caesar();
 
-  #atbash = () => (d) => d;
+  #atbash = new Atbash();
 
-  #rot8 = () => (d) => d;
+  #rot8 = new Rot8();
 
   constructor(config) {
     if (Cipher.#isValid(config)) {
@@ -26,15 +30,15 @@ class Cipher {
   #getCipher(mark) {
     switch (mark) {
       case 'C0':
-        return this.#caesar('encrypt');
+        return this.#caesar.decrypt;
       case 'C1':
-        return this.#caesar('decrypt');
+        return this.#caesar.encrypt;
       case 'R0':
-        return this.#rot8('encrypt');
+        return this.#rot8.decrypt;
       case 'R1':
-        return this.#rot8('decrypt');
+        return this.#rot8.encrypt;
       case 'A':
-        return this.#atbash();
+        return this.#atbash.encrypt;
       default:
         return (data) => data;
     }
