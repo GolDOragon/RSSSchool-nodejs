@@ -41,15 +41,13 @@ class Cipher {
         return this.#rot8.decrypt;
       case 'R1':
         return this.#rot8.encrypt;
-      case 'A':
-        return this.#atbash.encrypt;
       default:
-        return (data) => data;
+        return this.#atbash.encrypt;
     }
   }
 
   static #isValid(config) {
-    return typeof config === 'string' && config.match(/^([CRA][10]?-?)+$/);
+    return typeof config === 'string' && config.match(/^((([CR][10])|A)?-?)+$/);
   }
 }
 

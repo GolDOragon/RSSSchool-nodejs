@@ -1,34 +1,34 @@
-const Caesar = require('../ciphers/Caesar');
+const Atbash = require('../Atbash');
 
-describe('Caesar', () => {
+describe('Atbash', () => {
   test('should be defined', () => {
-    expect(Caesar).toBeDefined();
+    expect(Atbash).toBeDefined();
   });
 
   let cipher;
 
   beforeEach(() => {
-    cipher = new Caesar();
+    cipher = new Atbash();
   });
 
   test.each([
-    ['ABCD', 'BCDE'],
-    ['abcd', 'bcde'],
+    ['ABCD', 'ZYXW'],
+    ['abcd', 'zyxw'],
     ['123', '123'],
-    ['A1B1', 'B1C1'],
-    ['Z1A1', 'A1B1'],
-    ['"_"AAA', '"_"BBB'],
+    ['A1B1', 'Z1Y1'],
+    ['Z1A1', 'A1Z1'],
+    ['"_"AAA', '"_"ZZZ'],
   ])('should encrypt text', (data, expected) => {
     expect(cipher.encrypt(data)).toBe(expected);
   });
 
   test.each([
-    ['BCDE', 'ABCD'],
-    ['bcde', 'abcd'],
+    ['ZYXW', 'ABCD'],
+    ['zyxw', 'abcd'],
     ['123', '123'],
-    ['B1C1', 'A1B1'],
-    ['A1B1', 'Z1A1'],
-    ['"_"BBB', '"_"AAA'],
+    ['Z1Y1', 'A1B1'],
+    ['A1Z1', 'Z1A1'],
+    ['"_"ZZZ', '"_"AAA'],
   ])('should decrypt text', (data, expected) => {
     expect(cipher.decrypt(data)).toBe(expected);
   });
