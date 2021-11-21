@@ -5,6 +5,8 @@
   "main": "./bin/index.js",
   "scripts": {
     "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch --coverage",
     "dev": "nodemon src/index.js",
     "lint": "eslint . --ext .js --ignore-path .gitignore --max-warnings 0"
   },
