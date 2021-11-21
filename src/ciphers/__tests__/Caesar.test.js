@@ -1,34 +1,34 @@
-const Rot8 = require('../ciphers/Rot8');
+const Caesar = require('../Caesar');
 
-describe('ROT-8', () => {
+describe('Caesar', () => {
   test('should be defined', () => {
-    expect(Rot8).toBeDefined();
+    expect(Caesar).toBeDefined();
   });
 
   let cipher;
 
   beforeEach(() => {
-    cipher = new Rot8();
+    cipher = new Caesar();
   });
 
   test.each([
-    ['ABCD', 'IJKL'],
-    ['abcd', 'ijkl'],
+    ['ABCD', 'BCDE'],
+    ['abcd', 'bcde'],
     ['123', '123'],
-    ['A1B1', 'I1J1'],
-    ['Z1A1', 'H1I1'],
-    ['"_"AAA', '"_"III'],
+    ['A1B1', 'B1C1'],
+    ['Z1A1', 'A1B1'],
+    ['"_"AAA', '"_"BBB'],
   ])('should encrypt text', (data, expected) => {
     expect(cipher.encrypt(data)).toBe(expected);
   });
 
   test.each([
-    ['IJKL', 'ABCD'],
-    ['ijkl', 'abcd'],
+    ['BCDE', 'ABCD'],
+    ['bcde', 'abcd'],
     ['123', '123'],
-    ['I1J1', 'A1B1'],
-    ['H1I1', 'Z1A1'],
-    ['"_"III', '"_"AAA'],
+    ['B1C1', 'A1B1'],
+    ['A1B1', 'Z1A1'],
+    ['"_"BBB', '"_"AAA'],
   ])('should decrypt text', (data, expected) => {
     expect(cipher.decrypt(data)).toBe(expected);
   });

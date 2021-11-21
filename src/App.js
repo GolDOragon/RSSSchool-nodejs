@@ -1,5 +1,5 @@
 const { pipeline } = require('stream');
-const Parser = require('./Parser');
+const Parser = require('./parser/Parser');
 const getInputStream = require('./steams/getInputStream');
 const getTransformStream = require('./steams/getTransformStream');
 const getOutputStream = require('./steams/getOutputStream');

@@ -1,4 +1,4 @@
-const { AppError, CODES } = require('./AppError');
+const { AppError, CODES } = require('../AppError');
 
 // TODO: move common code in a function
 class Parser {
